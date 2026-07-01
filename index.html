@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Walimatul Khitan Raffa</title>
+    <style>
+        /* --- STYLE UTAMA --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Times New Roman', serif; }
+        body { background-color: #f4ebd0; color: #3d2612; text-align: center; overflow: hidden; } /* Overflow hidden awal biar gak bisa scroll sebelum dibuka */
+        
+        .container {
+            max-width: 500px; margin: 0 auto; background: #fcf8f2;
+            min-height: 100vh; position: relative; box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            padding-bottom: 50px;
+        }
+
+        /* --- SCREEN 1: COVER TIRAI MERAH --- */
+        #cover-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+            background: linear-gradient(135deg, #8b0000, #4a0000);
+            z-index: 999; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; color: #f4ebd0;
+            transition: top 1.5s ease-in-out; /* Animasi mulus ke atas */
+            padding: 20px;
+        }
+        #cover-screen.open { top: -100vh; } /* Membuka tirai ke atas */
+        
+        .tirai-ornamen { font-size: 60px; margin-bottom: 20px; animation: bounce 2s infinite; }
+        .btn-open {
+            background-color: #d4af37; color: #4a0000; border: none;
+            padding: 15px 35px; font-size: 18px; font-weight: bold;
+            border-radius: 30px; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            margin-top: 30px; transition: 0.3s;
+        }
+        .btn-open:hover { transform: scale(1.1); background-color: #fff; }
+
+        /* --- KONTEN UTAMA --- */
+        .section {
+            padding: 50px 20px; border-bottom: 2px dashed #d4af37;
+            background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+        }
+        h1, h2, h3 { color: #8b0000; margin-bottom: 15px; }
+        .nama-raffa { font-size: 36px; font-weight: bold; color: #d4af37; text-shadow: 1px 1px 2px #4a0000; margin: 20px 0; }
+        
+        /* --- TIMER & KOTAK --- */
+        .timer-container { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .time-box { background: #8b0000; color: #fff; padding: 15px; border-radius: 8px; min-width: 65px; }
+        .time-box span { display: block; font-size: 24px; font-weight: bold; }
+
+        /* --- BUTTONS & FORMS --- */
+        .btn-link {
+            display: inline-block; background-color: #8b0000; color: white;
+            text-decoration: none; padding: 12px 25px; border-radius: 8px; margin-top: 15px; font-weight: bold;
+        }
+        .form-box { background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #d4af37; margin-top: 20px;}
+        input, select, textarea { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #d4af37; border-radius: 5px; }
+        .btn-submit { background-color: #d4af37; color: #4a0000; border: none; width: 100%; padding: 12px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        
+        @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    </style>
+</head>
+<body>
+
+<!-- 🎵 PEMUTAR MUSIK ALHIJRATU -->
+<audio id="bg-music" loop>
+    <source src="Alhijratu.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+
+    <!-- 🎪 COVER DEPAN (TIRAI) -->
+    <div id="cover-screen">
+        <div class="tirai-ornamen">🎪</div>
+        <p style="letter-spacing: 3px; text-transform: uppercase;">Walimatul Khitan</p>
+        <h1 class="nama-raffa">Raffa Azka P. S.</h1>
+        <p>Kepada Yth. Bapak/Ibu/Saudara/i</p>
+        <p style="font-style: italic; margin-top: 10px;">Di Tempat</p>
+        <!-- Tombol ini yang bakal manggil fungsi bukaUndangan() -->
+        <button class="btn-open" onclick="bukaUndangan()">🫵🏻 Buka Undangan</button>
+    </div>
+
+    <!-- 🕌 MAKSUD ACARA & PROFIL -->
+    <div class="section">
+        <p style="font-style: italic; font-weight: bold;">Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+        <p style="margin-top: 20px; line-height: 1.8;">
+            Dengan memohon rahmat dan ridho Allah SWT, kami sekeluarga bermaksud mengundang Bapak/Ibu/Saudara/i untuk hadir dan memberikan doa restu dalam acara syukuran khitanan putra kami:
+        </p>
+        <h2 class="nama-raffa">Raffa Azka Putra Sinambela</h2>
+        <p style="margin-bottom: 20px;">( Raffa )</p>
+        <p><strong>Putra dari:</strong></p>
+        <p style="font-size: 18px; font-weight: bold; color: #8b0000;">Bpk. Osbon Sinambela & Ibu Audra Senorida</p>
+    </div>
+
+    <!-- 🗓️ DETAIL ACARA & COUNTDOWN -->
+    <div class="section" style="background-color: #f7edd2;">
+        <h3>Waktu & Lokasi Acara</h3>
+        <p style="font-size: 18px; font-weight: bold; margin-top:15px;">Minggu, 5 Juli 2026</p>
+        <p>Pukul: 10.00 - 21.00 WIB</p>
+        
+        <div class="timer-container">
+            <div class="time-box"><span id="days">00</span>Hari</div>
+            <div class="time-box"><span id="hours">00</span>Jam</div>
+            <div class="time-box"><span id="minutes">00</span>Menit</div>
+            <div class="time-box"><span id="seconds">00Normally I can help with things like this, but I don't seem to have access to that content. You can try again or ask me for something else.
+              
